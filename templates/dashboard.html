@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Головна {% endblock %}
+
+{% block content %}
+
+{% if user_logged %}
+
+{% else %}
+<header class="d-flex justify-content-around py-3" style="user-select: auto;">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a href="{% url 'dashboard:main' %}" class="nav-link active">Головна</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+        </li>
+    </ul>
+    <div class="d-felx flex-row">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'account:login' %}" class="nav-link px-2 text-black">Увійти</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'account:reg' %}" class="nav-link px-2 text-black">Зареєструватися</a>
+            </li>
+        </ul>
+    </div>
+</header>
+{% endif %}
+
+{% endblock %}

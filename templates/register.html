@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}DL | Register{% endblock %}
+
+{% block content %}
+<header class="d-flex justify-content-around py-3" style="user-select: auto;">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+        </li>
+    </ul>
+    <div class="d-felx flex-row">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'account:login' %}" class="nav-link px-2 text-black">Увійти</a>
+            </li>
+            
+        </ul>
+    </div>
+</header>
+
+<main class="flex justify-content-center text-center">
+    <div class="container w-25">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p class="h3 mb-3 fw-normal">Реєстрація</p>
+            <div class="form-floating mb-3" style="user-select: auto;">
+                <input type="text" name="username" id="usernameInput" class="form-control" placeholder="Ім'я користувача" maxlength="150" required>
+                <label for="usernameInput" style="user-select: auto;">Ім'я користувача</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password1" id="passwordInput1" class="form-control" placeholder="Пароль" required>
+                <label for="usernameInput1" style="user-select: auto;">Пароль</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password2" id="passwordInput2" class="form-control" placeholder="Підтвердіть пароль" required>
+                <label for="usernameInput2" style="user-select: auto;">Підтвердіть пароль</label>
+            </div>
+    
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Зареєструватися</button>
+        </form>
+    </div>
+</main>
+{% endblock %}
