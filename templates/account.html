@@ -3,7 +3,7 @@
 {% block title %} DL | {{username}} {% endblock %}
 
 {% block content %}
-{% if user_logged %}
+{% if user_logged and form_valid %}
 <header class="d-flex justify-content-around py-3" style="user-select: auto;">
     <ul class="nav nav-pills">
         <li class="nav-item">
@@ -18,10 +18,110 @@
             <li class="nav-item">
                 <a href="{% url 'account:logout' %}" class="nav-link px-2 text-black">Вийти</a>
             </li>
-            
         </ul>
     </div>
 </header>
+
+<div class="container flex-grow-1">
+    <h4 class="font-weight-bold py-3 mb-4">
+        Налаштування профілю
+    </h4>
+    <div class="tab-pane fade active show">
+        <div class="card-body media align-items-center">
+            <p class="">Ім'я користувача: {{username}}</p>
+            <p class="">E-mail: {{email}}</p>
+        </div>
+        <hr class="">
+        <div class="card-body">
+            <form action="" class="" method='POST'>
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="form-label">Ім'я користувача</label>
+                    <input type="text" name="username" class="form-control mb-1" value="{{username}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ім'я</label>
+                    <input type="text" name="first_name" class="form-control mb-1" value="{{first_name}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Прізвище</label>
+                    <input type="text" name="last_name" class="form-control mb-1" value="{{last_name}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" name="email" class="form-control mb-1" value="{{email}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Зберегти" class="form-control">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% elif user_logged and not form_valid %}
+
+<header class="d-flex justify-content-around py-3" style="user-select: auto;">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+        </li>
+    </ul>
+    <div class="d-felx flex-row">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'account:logout' %}" class="nav-link px-2 text-black">Вийти</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="container flex-grow-1">
+    <h4 class="font-weight-bold py-3 mb-4">
+        Налаштування профілю
+    </h4>
+    <div class="tab-pane fade active show">
+        <div class="alert alert-danger">
+            <strong>Помилка!</strong> Дані ведено не коректно!
+        </div>
+        <div class="card-body media align-items-center">
+            <p class="">Ім'я користувача: {{username}}</p>
+            <p class="">E-mail: {{email}}</p>
+        </div>
+        <hr class="">
+        <div class="card-body">
+            <form action="" class="" method='POST'>
+
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="form-label">Ім'я користувача</label>
+                    <input type="text" name="username" class="form-control mb-1" value="{{username}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ім'я</label>
+                    <input type="text" name="first_name" class="form-control mb-1" value="{{first_name}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Прізвище</label>
+                    <input type="text" name="last_name" class="form-control mb-1" value="{{last_name}}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" name="email" class="form-control mb-1" value="{{email}}">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Зберегти" class="form-control">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% else %}
 <header class="d-flex justify-content-around py-3" style="user-select: auto;">
     <ul class="nav nav-pills">
@@ -60,8 +160,5 @@
         </div>
     <!-- </div> -->
 </div>
-
 {% endif %}
-
-
 {% endblock %}

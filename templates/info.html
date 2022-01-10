@@ -3,7 +3,26 @@
 {% block title %}  {% endblock %}
 
 {% block content %}
+{% if user_logged %}
+<header class="d-flex justify-content-around py-3" style="user-select: auto;">
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'dashboard:info' %}" class="nav-link active">Інформація</a>
+        </li>
+    </ul>
+    <div class="d-felx flex-row">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'account:account' %}?username={{username}}" class="nav-link px-2 text-black">Профіль</a>
+            </li>
+        </ul>
+    </div>
+</header>
 
+{% else %}
 <header class="d-flex justify-content-around py-3" style="user-select: auto;">
     <ul class="nav nav-pills">
         <li class="nav-item">
@@ -24,5 +43,6 @@
         </ul>
     </div>
 </header>
+{% endif %}
 
 {% endblock %}

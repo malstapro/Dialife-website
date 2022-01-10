@@ -1,8 +1,13 @@
+import django.core.exceptions
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+
+from .forms import UpdateUserForm
 
 
 def registerPage(request):
@@ -12,6 +17,9 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            redirect(reverse('dashboard:main'))
+        else:
+            print('form not valid')
 
     ctx = {'form': form}
     return render(request, 'register.html', ctx)
@@ -45,14 +53,34 @@ def account(request):
         ctx = {'user_logged': user_logged}
     else:
         if request.method == 'GET':
+            user_form = UpdateUserForm(request, instance=request.user)
             user_logged = True
-            username = request.GET['username']
-            ctx = {'user_logged': user_logged, 'username': username}
+            username = request.user.username
+            first_name = request.user.first_name
+            last_name = request.user.last_name
+            email = request.user.email
+            ctx = {'form_valid': True, 'user_logged': user_logged, 'username': username, 'first_name': first_name, 'last_name': last_name, 'email': email, 'form': user_form}
+        elif request.method == 'POST':
+            username = request.POST['username']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            user_form = UpdateUserForm(request.POST, instance=request.user)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect(reverse('dashboard:main'))
+            else:
+                user_logged = True
+                ctx = {'form_valid': False, 'user_logged': user_logged, 'username': username, 'first_name': first_name, 'last_name': last_name, 'email': email, 'form': user_form}
         else:
             pass
     return render(request, 'account.html', ctx)
 
 
-def logoutPage(requst):
-    logout(requst)
+def updateUser(request):
+    pass
+
+
+def logoutPage(request):
+    logout(request)
     return redirect('/')

@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-sgk0u1+t6(m!zmhlgc)owwnz493b3d^ve)76q^2pl@=m6+ppel
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'tesla33io.loca.lt'
+    'tesla33io.loca.lt',
+    '127.0.0.1'
 ]
 
 
@@ -114,11 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
+
+L10N = False
+
+DATETIME_FORMAT = '%Y-%m-%d%H:%M:%S'
 
 
 # Static files (CSS, JavaScript, Images)
