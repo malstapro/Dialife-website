@@ -17,10 +17,11 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect(reverse('dashboard:main'))
+            return redirect(reverse('dashboard:main'))
         else:
-            print('form not valid')
-
+            form_valid = False
+            ctx = {'form': form, 'form_valid': form_valid}
+            return render(request, 'login.html', ctx)
     ctx = {'form': form}
     return render(request, 'register.html', ctx)
 
@@ -31,6 +32,7 @@ def loginPage(request):
         print(form.is_valid())
         print(form.cleaned_data)
         if form.is_valid():
+            form_valid = True
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
@@ -39,9 +41,13 @@ def loginPage(request):
                 login(request, user)
                 return redirect(f'/account?username={user.username}')
             else:
-                messages.error(request, 'Invalid username or password.')
+                form_valid = False
+                ctx = {'form': form, 'form_valid': form_valid}
+                return render(request, 'login.html', ctx)
         else:
-            messages.error(request, 'Invalid username or password.')
+            form_valid = False
+            ctx = {'form': form, 'form_valid': form_valid}
+            return render(request, 'login.html', ctx)
     form = AuthenticationForm()
     ctx = {'form': form}
     return render(request, 'login.html', ctx)

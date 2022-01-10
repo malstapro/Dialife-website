@@ -14,6 +14,7 @@ def main(request):
         sugars = Sugar.objects.all().filter(user_id=request.user.id)
         index_list = []
         for i in sugars:
+            i = str(i)
             index = i.split(',')[1]
             time = i.split(',')[3].split(':')[0:2]
             index_list.append(f'{time[0]}:{time[1]} - {index}')
