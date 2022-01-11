@@ -17,20 +17,19 @@ def registerPage(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('dashboard:main'))
+            return redirect(reverse('account:login'))
         else:
             form_valid = False
             ctx = {'form': form, 'form_valid': form_valid}
-            return render(request, 'login.html', ctx)
-    ctx = {'form': form}
-    return render(request, 'register.html', ctx)
+            return render(request, 'register.html', ctx)
+    else:
+        ctx = {'form': form, 'form_valid': True}
+        return render(request, 'register.html', ctx)
 
 
 def loginPage(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        print(form.is_valid())
-        print(form.cleaned_data)
         if form.is_valid():
             form_valid = True
             username = form.cleaned_data.get('username')
@@ -42,15 +41,15 @@ def loginPage(request):
                 return redirect(f'/account?username={user.username}')
             else:
                 form_valid = False
-                ctx = {'form': form, 'form_valid': form_valid}
-                return render(request, 'login.html', ctx)
         else:
             form_valid = False
-            ctx = {'form': form, 'form_valid': form_valid}
-            return render(request, 'login.html', ctx)
-    form = AuthenticationForm()
-    ctx = {'form': form}
-    return render(request, 'login.html', ctx)
+        ctx = {'form': form, 'form_valid': form_valid}
+        print(form_valid)
+        return render(request, 'login.html', ctx)
+    else:
+        form = AuthenticationForm()
+        ctx = {'form': form, 'form_valid': True}
+        return render(request, 'login.html', ctx)
 
 
 def account(request):

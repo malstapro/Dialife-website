@@ -16,7 +16,10 @@
     <div class="d-felx flex-row">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a href="{% url 'account:account' %}?username={{username}}" class="nav-link px-2 text-black">Профіль</a>
+                <a href="{% url 'account:account' %}?username={{username}}" class="nav-link">Профіль</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'account:logout' %}" class="nav-link">Вийти</a>
             </li>
         </ul>
     </div>
@@ -35,10 +38,10 @@
     <div class="d-felx flex-row">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a href="{% url 'account:login' %}" class="nav-link px-2 text-black">Увійти</a>
+                <a href="{% url 'account:login' %}" class="nav-link">Увійти</a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'account:reg' %}" class="nav-link px-2 text-black">Зареєструватися</a>
+                <a href="{% url 'account:reg' %}" class="nav-link">Зареєструватися</a>
             </li>
         </ul>
     </div>
