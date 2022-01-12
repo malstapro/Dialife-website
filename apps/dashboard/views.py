@@ -13,13 +13,16 @@ def main(request):
         username = request.user.username
         sugars = Sugar.objects.all().filter(user_id=request.user.id)
         index_list = []
+        chart_data = {'time': [], 'indexes': []}
         for i in sugars:
             i = str(i)
             index = i.split(',')[1]
             time = i.split(',')[3].split(':')[0:2]
             index_list.append(f'{time[0]}:{time[1]} - {index}')
-        sugar_list = []
-        ctx = {'user_logged': user_logged, 'username': username, 'sugar_list': sugar_list, 'index_list': index_list}
+            chart_data['time'].append(f'{time[0]}:{time[1]}')
+            chart_data['indexes'].append(index)
+        print(chart_data)
+        ctx = {'user_logged': user_logged, 'username': username, 'index_list': index_list, 'chart_data_time': chart_data['time'], 'chart_data_indexes': chart_data['indexes']}
     return render(request, 'dashboard.html', ctx)
 
 
