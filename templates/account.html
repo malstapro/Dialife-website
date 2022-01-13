@@ -4,16 +4,18 @@
 
 {% block content %}
 {% if user_logged and form_valid %}
-<header class="d-flex justify-content-around py-3" style="user-select: auto;">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
-        </li>
-    </ul>
-    <div class="d-felx flex-row">
+<header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
+    <div class="col-sm-4 d-flex justify-content-start">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:account' %}?username={{username}}" class="nav-link active">Профіль</a>
@@ -65,16 +67,18 @@
 </div>
 {% elif user_logged and not form_valid %}
 
-<header class="d-flex justify-content-around py-3" style="user-select: auto;">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
-        </li>
-    </ul>
-    <div class="d-felx flex-row">
+<header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
+    <div class="col-sm-4 d-flex justify-content-start">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:account' %}?username={{username}}" class="nav-link active">Профіль</a>
@@ -129,16 +133,18 @@
 </div>
 
 {% else %}
-<header class="d-flex justify-content-around py-3" style="user-select: auto;">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
-        </li>
-    </ul>
-    <div class="d-felx flex-row">
+<header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
+    <div class="col-sm-4 d-flex justify-content-start">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'dashboard:info' %}" class="nav-link">Інформація</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:login' %}" class="nav-link">Увійти</a>
@@ -150,21 +156,19 @@
     </div>
 </header>
 
-<div class="container h-100 w-50">
-    <!-- <div class="col align-self-center"> -->
-        <div class="modal modal-alert position-static d-block py-5  ">
-            <div class="align-middle modal-content rounded-4 shadow">
-                <div class="modal-body p-4 text-center">
-                    <h5 class="mb-0">Ви не увійшли до системи!</h5>
-                    <p class="mb-0">Будласка увійдіть до системи, або зареєструйтеся, якщо ще не маєте акаунту.</p>
-                </div>
-                <div class="modal-footer flex-nowrap p-0 justify-content-around">
-                    <a href="{% url 'account:login' %}" class="text-decoration-none text-success">Увійти</a>
-                    <a href="{% url 'account:reg' %}" class="text-decoration-none text-success">Зареєструватися</a>
-                </div>
+<div class="container">
+    <div class="modal modal-alert position-static d-block py-5  ">
+        <div class="align-middle modal-content rounded-4 shadow">
+            <div class="modal-body p-4 text-center">
+                <h5 class="mb-0">Ви не увійшли до системи!</h5>
+                <p class="mb-0">Будласка увійдіть до системи, або зареєструйтеся, якщо не маєте акаунту.</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0 justify-content-around">
+                <a href="{% url 'account:login' %}" class="text-decoration-none text-success">Увійти</a>
+                <a href="{% url 'account:reg' %}" class="text-decoration-none text-success">Зареєструватися</a>
             </div>
         </div>
-    <!-- </div> -->
+    </div>
 </div>
 {% endif %}
 {% endblock %}
