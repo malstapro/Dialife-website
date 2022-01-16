@@ -104,7 +104,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card" id="sugar_list">
-                    <div class="position-center text-center"><h5 class="m-3">Показники за сьогдні</h5></div>
+                    <div class="position-center text-center"><h5 class="m-3">Показники</h5></div>
                     <div class="card-body overflow-auto" style="">
                         <!-- <h5 class="card-title position-fixed">Показники за сьогдні</h5> -->
                         <div class="d-flex flex-column" id="indexes">
@@ -145,17 +145,78 @@
 </header>
 
 <div class="container">
-    <div class="modal modal-alert position-static d-block py-5  ">
-        <div class="align-middle modal-content rounded-4 shadow">
-            <div class="modal-body p-4 text-center">
-                <h5 class="mb-0">Ви не увійшли до системи!</h5>
-                <p class="mb-0">Будласка увійдіть до системи, або зареєструйтеся, якщо не маєте акаунту.</p>
-            </div>
-            <div class="modal-footer flex-nowrap p-0 justify-content-around">
-                <a href="{% url 'account:login' %}" class="text-decoration-none text-success">Увійти</a>
-                <a href="{% url 'account:reg' %}" class="text-decoration-none text-success">Зареєструватися</a>
+    <div class="row row-cols-sm-3 justify-content-between">
+
+        <div class="col-sm-3 order-sm-last">
+            <h3>Вітаю!</h3>
+            <h5>До ваших послуг, сайт для допомоги людям хворим на цукровий діабет.</h5>
+            <p class="lead"><strong>Dialife</strong> допомагає зберігати та графічно відображувати показники цукру.</p>
+            <hr>
+            <p class="lead">Щоб почати користуватися сайтом стовріть акаунт або увійдіть до уже існуючого</p>
+        </div>
+        <div class="col-sm-4 order-last order-sm-first">
+            <div class="card" id="sugar_list">
+                <div class="position-center text-center"><h5 class="m-3">Показники</h5></div>
+                    <div class="card-body overflow-auto">
+                        <div class="d-flex flex-column" id="indexes">
+                            <p class="btn btn-primary">7:05 - 5.3</p>
+                            <p class="btn btn-primary">10:20 - 6.2</p>
+                            <p class="btn btn-primary">13:00 - 6.5</p>
+                            <p class="btn btn-primary">15:20 - 6.3</p>
+                            <p class="btn btn-primary">18:00 - 5.9</p>
+                            <p class="btn btn-primary">21:00 - 5.5</p>
+                        </div>
+                    </div>
             </div>
         </div>
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Простий графічний інтерфейс</h5>
+                    <div class="chart">
+                        <canvas id="chart" width="350px" height="350px"></canvas>
+                        <script>
+                            const ctx = document.getElementById('chart').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: ['7:05', '10:20', '13:00', '15:20', '18:00', '21:00'],
+                                    datasets: [{
+                                        label: 'Показники цукру',
+                                        data: ['5.3', '6.2', '6.5', '6.3', '5.9', '5.5'],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endif %}
