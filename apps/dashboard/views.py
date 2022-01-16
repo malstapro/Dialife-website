@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Sugar
 from datetime import datetime
+import json
+import os
 
 
 def main(request):
@@ -35,6 +37,14 @@ def info(request):
             user_logged = True
             username = request.user.username
             ctx = {'user_logged': user_logged, 'username': username}
+    with open('apps/dashboard/data/food_data.json', 'r') as json_file:
+        data = json.load(json_file)
+        print(data['data'])
+        for i in data['data']:
+            print(i)
+            print(data['data'][i])
+        food_list = data['data']
+    ctx['food_list'] = food_list
     return render(request, 'info.html', ctx)
 
 

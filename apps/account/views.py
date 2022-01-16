@@ -38,7 +38,7 @@ def loginPage(request):
             if user is not None:
                 print(user)
                 login(request, user)
-                return redirect(f'/account?username={user.username}')
+                return redirect(reverse('dashboard:main'))
             else:
                 form_valid = False
         else:
