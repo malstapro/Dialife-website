@@ -3,7 +3,6 @@ from django.urls import reverse
 from .models import Sugar
 from datetime import datetime
 import json
-import os
 
 
 def main(request):
@@ -23,7 +22,6 @@ def main(request):
             index_list.append(f'{time[0]}:{time[1]} - {index}')
             chart_data['time'].append(f'{time[0]}:{time[1]}')
             chart_data['indexes'].append(index)
-        print(chart_data)
         ctx = {'user_logged': user_logged, 'username': username, 'index_list': index_list, 'chart_data_time': chart_data['time'], 'chart_data_indexes': chart_data['indexes']}
     return render(request, 'dashboard.html', ctx)
 
@@ -39,10 +37,6 @@ def info(request):
             ctx = {'user_logged': user_logged, 'username': username}
     with open('apps/dashboard/data/food_data.json', 'r') as json_file:
         data = json.load(json_file)
-        print(data['data'])
-        for i in data['data']:
-            print(i)
-            print(data['data'][i])
         food_list = data['data']
     ctx['food_list'] = food_list
     return render(request, 'info.html', ctx)
