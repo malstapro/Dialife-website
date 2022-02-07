@@ -11,7 +11,7 @@
 
 {% if user_logged %}
 <header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
-    <div class="col-sm-4 d-flex justify-content-start">
+    <div class="col-sm-4 d-flex justify-content-start order-sm-1">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'dashboard:main' %}" class="nav-link active">Головна</a>
@@ -21,7 +21,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
+    <h3 class="order-sm-2 order-first">Diahelp</h3>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start order-sm-3">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:account' %}?username={{username}}" class="nav-link">Профіль</a>
@@ -61,43 +62,6 @@
                         <h5 class="card-title">Графік показників цукру</h5>
                         <div class="chart" style="">
                             <canvas id="chart" width="350px" height="350px"></canvas>
-                            <script>
-                                const ctx = document.getElementById('chart').getContext('2d');
-                                const myChart = new Chart(ctx, {
-                                    type: 'line',
-                                    data: {
-                                        labels: [{% for time in chart_data_time %}'{{time}}',{% endfor %}],
-                                        datasets: [{
-                                            label: 'Показники цукру',
-                                            data: [{% for index in chart_data_indexes %}'{{index}}',{% endfor %}],
-                                            backgroundColor: [
-                                                'rgba(255, 99, 132, 0.2)',
-                                                'rgba(54, 162, 235, 0.2)',
-                                                'rgba(255, 206, 86, 0.2)',
-                                                'rgba(75, 192, 192, 0.2)',
-                                                'rgba(153, 102, 255, 0.2)',
-                                                'rgba(255, 159, 64, 0.2)'
-                                            ],
-                                            borderColor: [
-                                                'rgba(255, 99, 132, 1)',
-                                                'rgba(54, 162, 235, 1)',
-                                                'rgba(255, 206, 86, 1)',
-                                                'rgba(75, 192, 192, 1)',
-                                                'rgba(153, 102, 255, 1)',
-                                                'rgba(255, 159, 64, 1)'
-                                            ],
-                                            borderWidth: 1
-                                        }]
-                                    },
-                                    options: {
-                                        scales: {
-                                            y: {
-                                                beginAtZero: true
-                                            }
-                                        }
-                                    }
-                                });
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -117,11 +81,47 @@
         </div>
     </div>
 </div>
-
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for time in chart_data_time %}'{{time}}',{% endfor %}],
+            datasets: [{
+                label: 'Показники цукру',
+                data: [{% for index in chart_data_indexes %}'{{index}}',{% endfor %}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 {% else %}
 <header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
-    <div class="col-sm-4 d-flex justify-content-start">
+    <div class="col-sm-4 d-flex justify-content-start order-sm-1">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'dashboard:main' %}" class="nav-link active">Головна</a>
@@ -131,7 +131,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
+    <h3 class="order-sm-2 order-first">Diahelp</h3>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start order-sm-3">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:login' %}" class="nav-link">Увійти</a>
@@ -149,7 +150,7 @@
         <div class="col-sm-3 order-sm-last">
             <h3>Вітаю!</h3>
             <h5>До ваших послуг, сайт для допомоги людям хворим на цукровий діабет.</h5>
-            <p class="lead"><strong>Dialife</strong> допомагає зберігати та графічно відображувати показники цукру.</p>
+            <p class="lead"><strong>Diahelp</strong> допомагає зберігати та графічно відображувати показники цукру.</p>
             <hr>
             <p class="lead">Щоб почати користуватися сайтом стовріть акаунт або увійдіть до уже існуючого</p>
         </div>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}DL | Register{% endblock %}
+{% block title %}Реєстрація{% endblock %}
 
 {% block content %}
 {% if form_valid %}
 <header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
-    <div class="col-sm-4 d-flex justify-content-start">
+    <div class="col-sm-4 d-flex justify-content-start order-sm-1">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
@@ -15,7 +15,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
+    <h3 class="order-sm-2 order-first">Diahelp</h3>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start order-sm-3">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:login' %}" class="nav-link">Увійти</a>
@@ -55,7 +56,7 @@
 </main>
 {% elif not form_valid %}
 <header class="row row-cols-auto justify-content-around py-3 m-3" style="user-select: auto;">
-    <div class="col-sm-4 d-flex justify-content-start">
+    <div class="col-sm-4 d-flex justify-content-start order-sm-1">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'dashboard:main' %}" class="nav-link">Головна</a>
@@ -65,7 +66,8 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start">
+    <h3 class="order-sm-2 order-first">Diahelp</h3>
+    <div class="col-sm-4 d-flex justify-content-sm-end justify-content-start order-sm-3">
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="{% url 'account:login' %}" class="nav-link">Увійти</a>
