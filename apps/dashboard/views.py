@@ -5,6 +5,9 @@ from datetime import datetime
 import json
 
 
+month_names = {'1': 'січня', '2': 'лютого', '3': 'березня', '4': 'квітня', '5': 'травня', '6': 'червня', '7': 'липня', '8': 'серпня', '9': 'вересня', '10': 'жовтня', '11': 'листопада', '12': 'грудня'}
+
+
 def main(request):
     if str(request.user) == 'AnonymousUser':
         user_logged = False
@@ -18,11 +21,16 @@ def main(request):
         for i in sugars:
             i = str(i)
             index = i.split(',')[1]
+            date = i.split(',')[2]
             time = i.split(',')[3].split(':')[0:2]
-            index_list.append(f'{time[0]}:{time[1]} - {index}')
-            chart_data['time'].append(f'{time[0]}:{time[1]}')
-            chart_data['indexes'].append(index)
-        ctx = {'user_logged': user_logged, 'username': username, 'index_list': index_list, 'chart_data_time': chart_data['time'], 'chart_data_indexes': chart_data['indexes']}
+            if date == str(datetime.now().date()):
+                index_list.append(f'{time[0]}:{time[1]} - {index}')
+                chart_data['time'].append(f'{time[0]}:{time[1]}')
+                chart_data['indexes'].append(index)
+        if len(index_list) == 0:
+            index_list = ['Немає показників']
+        today_date = f'{datetime.now().day} {month_names[str(datetime.now().month)]}'
+        ctx = {'user_logged': user_logged, 'username': username, 'index_list': index_list, 'chart_data_time': chart_data['time'], 'chart_data_indexes': chart_data['indexes'], 'today_date': today_date}
     return render(request, 'dashboard.html', ctx)
 
 

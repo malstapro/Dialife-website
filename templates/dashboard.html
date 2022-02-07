@@ -35,8 +35,10 @@
 </header>
 
 <div class="d-flex flex-column m-3">
-    <h3>Панель керування</h3>
+    <div class="container" id="header">
+        <h3>Панель керування</h3>
     <hr>
+    </div>
     <div class="container">
         <div class="row row-cols-auto" id="sugar_elements">
             <div class="col-sm-4">
@@ -60,7 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Графік показників цукру</h5>
-                        <div class="chart" style="">
+                        <div class="chart">
                             <canvas id="chart" width="350px" height="350px"></canvas>
                         </div>
                     </div>
@@ -68,7 +70,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="card" id="sugar_list">
-                    <div class="position-center text-center"><h5 class="m-3">Показники</h5></div>
+                    <div class="position-center text-center"><h5 class="m-3">Показники за {{today_date}}</h5></div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush text-center overflow-auto" style="height: 50vh;">
                             {% for index in index_list %}
@@ -90,22 +92,10 @@
             datasets: [{
                 label: 'Показники цукру',
                 data: [{% for index in chart_data_indexes %}'{{index}}',{% endfor %}],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                backgroundColor: 
                     'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                borderColor:
                     'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
                 borderWidth: 1
             }]
         },
