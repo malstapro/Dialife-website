@@ -44,7 +44,6 @@ def loginPage(request):
         else:
             form_valid = False
         ctx = {'form': form, 'form_valid': form_valid}
-        print(form_valid)
         return render(request, 'login.html', ctx)
     else:
         form = AuthenticationForm()
@@ -54,10 +53,13 @@ def loginPage(request):
 
 def account(request):
     if str(request.user) == 'AnonymousUser':
+        # If the user is not logged in
         user_logged = False
         ctx = {'user_logged': user_logged}
     else:
+        # If the user is logged in
         if request.method == 'GET':
+            # Generate page
             user_form = UpdateUserForm(request, instance=request.user)
             user_logged = True
             username = request.user.username
@@ -66,6 +68,7 @@ def account(request):
             email = request.user.email
             ctx = {'form_valid': True, 'user_logged': user_logged, 'username': username, 'first_name': first_name, 'last_name': last_name, 'email': email, 'form': user_form}
         elif request.method == 'POST':
+            # On form submit
             username = request.POST['username']
             first_name = request.POST['first_name']
             last_name = request.POST['last_name']
@@ -80,10 +83,6 @@ def account(request):
         else:
             pass
     return render(request, 'account.html', ctx)
-
-
-def updateUser(request):
-    pass
 
 
 def logoutPage(request):

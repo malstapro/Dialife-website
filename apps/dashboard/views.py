@@ -10,9 +10,11 @@ month_names = {'1': 'січня', '2': 'лютого', '3': 'березня', '4
 
 def main(request):
     if str(request.user) == 'AnonymousUser':
+        # If the user is not logged in
         user_logged = False
         ctx = {'user_logged': user_logged}
     else:
+        # If the user is logged in
         user_logged = True
         username = request.user.username
         sugars = Sugar.objects.all().filter(user_id=request.user.id)
